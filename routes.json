@@ -1,0 +1,17 @@
+{
+  "middleware": [],
+  "routes": {
+    "Dashboard": {
+      "path": "'/dashboard'",
+      "page": "src\\Dashboard.js"
+    }
+	"Users": {
+      "path": "'/users'",
+      "page": "src\\Users.js"
+    }
+	"UserDetails": {
+      "path": "'/detail'",
+      "page": "src\\UserDetails.js"
+    }
+  }
+}
