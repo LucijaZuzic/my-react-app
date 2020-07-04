@@ -15,6 +15,8 @@ import UserDetails from "./UserDetails.js";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import SearchBox from "./SearchBox.js";
+
 //const BrowserHistory = require('react-router/lib/BrowserHistory').default;
 
 const users = [
@@ -116,6 +118,11 @@ class App extends React.Component {
     return (
       <div>
         <h1>List of Users</h1>
+
+        <SearchBox
+          users={users}
+          predicate={(user, query) => user.first_name.includes(query)}
+        />
         <Router>
           <div>
             <nav>

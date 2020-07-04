@@ -19,30 +19,28 @@ class Search extends React.Component {
       return (
         <div>
           <h2>Search User</h2>
-          <Router>
-            <div>
-              <nav>
-                <Link
-                  to="/user-search-by-first-name"
-                  onClick={() => this.setState({ selectedSearch: 1 })}
-                >
-                  By First Name
-                </Link>
-                <Link
-                  to="/user-search-by-last-name"
-                  onClick={() => this.setState({ selectedSearch: 2 })}
-                >
-                  By Last Name
-                </Link>
-                <Link
-                  to="/user-search-by-email"
-                  onClick={() => this.setState({ selectedSearch: 3 })}
-                >
-                  By Email
-                </Link>
-              </nav>
-            </div>
-          </Router>
+          <div>
+            <nav>
+              <Link
+                to="/user-search-by-first-name"
+                onClick={() => this.setState({ selectedSearch: 1 })}
+              >
+                By First Name
+              </Link>
+              <Link
+                to="/user-search-by-last-name"
+                onClick={() => this.setState({ selectedSearch: 2 })}
+              >
+                By Last Name
+              </Link>
+              <Link
+                to="/user-search-by-email"
+                onClick={() => this.setState({ selectedSearch: 3 })}
+              >
+                By Email
+              </Link>
+            </nav>
+          </div>
         </div>
       );
     } else {

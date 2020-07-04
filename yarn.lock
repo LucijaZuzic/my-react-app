@@ -6578,6 +6578,11 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -8797,6 +8802,13 @@ react-scripts@3.4.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-use-search@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-use-search/-/react-use-search-0.2.3.tgz#e9df7591671d054315dcd852e1897db678be5180"
+  integrity sha512-OPcVEa6Tp4EWA9Pri058hGh8aLp4hTb+DhHESQCgr/xDMKM7E42FKt+0sJauTYIL+2ibFlb1h5aZ32JlWQIDQw==
+  dependencies:
+    lodash.debounce "^4.0.8"
 
 react@^16.13.1:
   version "16.13.1"
