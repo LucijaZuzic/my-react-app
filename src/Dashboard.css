@@ -7,10 +7,10 @@
 [class*='col-']:last-of-type {
   padding-right: 0;
 }
-a {
+a.col-1-5 {
   text-decoration: none;
 }
-*, *:after, *:before {
+.col-1-5, .col-1-5:after, .col-1-5:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

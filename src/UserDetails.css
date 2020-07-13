@@ -1,18 +1,18 @@
 /* UserDetailComponent's private CSS styles */
-label {
+label.user {
   display: inline-block;
   width: 10em;
   margin: .5em 0;
   color: #607D8B;
   font-weight: bold;
 }
-input {
+input.user  {
   height: 2em;
   width: 35em;
   font-size: 1em;
   padding-left: .4em;
 }
-button {
+button.detail {
   margin-top: 20px;
   font-family: Arial;
   background-color: #eee;

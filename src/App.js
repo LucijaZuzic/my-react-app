@@ -4,14 +4,12 @@ import Users from './Users.js';
 import Dashboard from './Dashboard.js';
 import Search from './Search.js';
 import Email from './Email.js';
-
+import { messages } from './Message.js';
 import LastName from './LastName.js';
-
 import FirstName from './FirstName.js';
-
 import Add from './Add.js';
-
 import UserDetails from './UserDetails.js';
+import Message from './Message';
 
 import {
   BrowserRouter as Router,
@@ -109,55 +107,57 @@ const users = [
         }
     ];
 
+
 //<Router history={new BrowserHistory}>
-class App extends React.Component {
-	render() {
-		return (
-			<div>
-				<h1>List of Users</h1>
-				<Router>
-				  <div>
-					<nav>
-						<Link to="/dashboard">Top 5 Users</Link>
-						<Link to="/users">All Users</Link>
-						<Link to="/user-add">Add User</Link>
-						<Link to="/user-search">Search User</Link>
-					</nav>
-					<Switch>
-					  <Route path="/users">
+const App = (props) => {
+	return (
+		<div>
+			<h1>List of Users</h1>
+			<Router>
+				<div>
+				<nav>
+					<Link className="app" to="/dashboard">Top 5 Users</Link>
+					<Link className="app" to="/users">All Users</Link>
+					<Link className="app" to="/user-add">Add User</Link>
+					<Link className="app" to="/user-search">Search User</Link>
+				</nav>
+				<Switch>
+					<Route path="/users">
 						<Users /> 
-					  </Route>
-					  <Route path="/dashboard">
+					</Route>
+					<Route path="/dashboard">
 						<Dashboard /> 
-					  </Route>
-					  <Route path="/user-search">
+					</Route>
+					<Route path="/user-search">
 						<Search /> 
-					  </Route>
-					  <Route path="/user-search-email">
+					</Route>
+					<Route path="/user-search-email">
 						<Email /> 
-					  </Route>
-					  <Route path="/user-search-last-name">
+					</Route>
+					<Route path="/user-search-last-name">
 						<LastName /> 
-					  </Route>
-					  <Route path="/user-search-first-name">
+					</Route>
+					<Route path="/user-search-first-name">
 						<FirstName /> 
-					  </Route>
-					  <Route path="/user-add">
+					</Route>
+					<Route path="/user-add">
 						<Add /> 
-					  </Route>
-					  {users.map((item, index) =>  (
-						  <Route path={"/detail/"+users[index].id} render = {() => <UserDetails index = {index} />} />
-					  ))}
-					</Switch>
-				  </div>
-				</Router>
-	            <button onClick={<ChangeUser />}>Change 1st user</button>
-			</div>
-		);
-	}
+					</Route>
+					<Route path="/detail/:id">
+						<UserDetails /> 
+					</Route>
+				</Switch>
+				</div>
+			</Router>
+			<Message />
+		</div>
+	);
 }
 
+
+
 function DeleteUser(props) {
+	messages.push("UserService: deleted user id="+users[props.index].id);
 	users.splice(props.index, 1);
 }
 
@@ -166,13 +166,9 @@ function ModifyUser(props) {
 	users[props.index].last_name = props.last_name;
 	users[props.index].email = props.email;
 	users[props.index].avatar = props.avatar;
-	return <h1> User with id {props.index} modified</h1>;
+	messages.push("UserService: updated user id="+users[props.index].id);
 }
 
-function ChangeUser(props) {
-	users[0].first_name = "Hallalala";
-	return <h1>{users[0].first_name} modified</h1>;
-}
 
 // Overrides the genId method to ensure that a user always has an id.
 // If the users array is empty,
@@ -184,17 +180,17 @@ function AddUser(props) {
 	var newUser = 
 		{
             "id": users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 11,
-            "email": props.first_name,
-            "first_name": props.last_name,
-            "last_name": props.email,
+            "email": props.email,
+            "first_name": props.first_name,
+            "last_name": props.last_name,
             "avatar": props.avatar
         };
-	users.add(newUser);
+	users.push(newUser);
+	messages.push("UserService: added user w/ id="+newUser.id);
 }
 
 export default App;
 export { users };
 export { ModifyUser };
 export { DeleteUser };
-
 export { AddUser };
