@@ -21,10 +21,10 @@ button.detail {
   border-radius: 4px;
   cursor: pointer;
 }
-button:hover {
+button.detail:hover {
   background-color: #cfd8dc;
 }
-button:disabled {
+button.detail:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;

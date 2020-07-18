@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './UserDetails.css';
 import { users } from './App.js'
 import { ModifyUser } from './App.js';
 import { DeleteUser } from './App.js';
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { messages } from './Message.js';
+import { add } from './App.js';
 
 var oldid;
 
@@ -22,14 +22,17 @@ const UserDetails = (props) => {
 			break;
 		}
 	}
-	if (id !== oldid) {
-		if (found) {
-			messages.push("UserService: fetched user id="+id);
-		} else {
-			messages.push("UserService: getUser id="+id+" failed: undefined");
-		}
-	}
-	oldid = id;
+	useEffect(() => {
+		if (id !== oldid) {
+			if (found) {
+				add("UserService: fetched user id="+id);
+			} else {
+				add("UserService: getUser id="+id+" failed: undefined");
+			}
+		}	
+		oldid = id;
+	}); 
+		
 	const [first_name, setFirstName] = useState(users[index].first_name);
 	const [last_name, setLastName] = useState(users[index].last_name);
 	const [email, setEmail] = useState(users[index].email);
@@ -60,7 +63,7 @@ const UserDetails = (props) => {
 					</label>
 				</div>
 				<div>
-					<img src={avatar} alt={ avatar}/>
+					<img src={avatar} alt={avatar}/>
 				</div>
 				<div>
 					<button className = "detail"
@@ -78,7 +81,8 @@ const UserDetails = (props) => {
 					>save</button>
 				</div>
 				<div>
-					<button className = "detail" onClick={() => {
+					<button className = "detail"
+					onClick={() => {
 						DeleteUser({index});
 						oldid = -1;
 						return history.goBack();

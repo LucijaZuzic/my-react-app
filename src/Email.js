@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Search.css';
 import { users } from './App.js'
 import { useSearch } from "react-use-search";
-import { messages } from './Message.js';
+import { add } from './App.js';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
@@ -10,11 +10,13 @@ const SearchBox = ({ predicate }) => {
   const [filteredUsers, query, handleChange] = useSearch(users, predicate, {
     debounce: 300,
   });
-  if (filteredUsers.length > 0) {
-    messages.push("UserService: found users matching \""+query+"\"");
-  } else {
-    messages.push("UserService: no users matching \""+query+"\"");
-  } 
+  useEffect(() => {
+		if (filteredUsers.length > 0) {
+      add("UserService: found users matching \""+query+"\"");
+    } else {
+      add("UserService: no users matching \""+query+"\"");
+    } 
+	});  
   return (
     <div>
       <input

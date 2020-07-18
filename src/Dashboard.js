@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Dashboard.css';
 import { users } from './App.js'
-import { messages } from './Message.js';
 import { Link } from "react-router-dom";
+import { add } from './App.js';
 
 const Dashboard = (props) => {
-	messages.push("UserService: fetched users");
-
+	useEffect(() => {
+		add("UserService: fetched users");
+	}); 
 	return (
 		<div>
 			<h3>Top 5 Users</h3>

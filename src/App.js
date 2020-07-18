@@ -4,7 +4,6 @@ import Users from './Users.js';
 import Dashboard from './Dashboard.js';
 import Search from './Search.js';
 import Email from './Email.js';
-import { messages } from './Message.js';
 import LastName from './LastName.js';
 import FirstName from './FirstName.js';
 import Add from './Add.js';
@@ -14,6 +13,7 @@ import Message from './Message';
 import {
   BrowserRouter as Router,
   Switch,
+  Redirect,
   Route,
   Link
 } from "react-router-dom";
@@ -109,6 +109,9 @@ const users = [
 
 
 //<Router history={new BrowserHistory}>
+
+var ref = React.createRef();
+
 const App = (props) => {
 	return (
 		<div>
@@ -122,6 +125,7 @@ const App = (props) => {
 					<Link className="app" to="/user-search">Search User</Link>
 				</nav>
 				<Switch>
+				    <Redirect exact from = "/" to = "/dashboard" />
 					<Route path="/users">
 						<Users /> 
 					</Route>
@@ -149,15 +153,13 @@ const App = (props) => {
 				</Switch>
 				</div>
 			</Router>
-			<Message />
+			<Message ref = {ref}/>
 		</div>
 	);
 }
 
-
-
 function DeleteUser(props) {
-	messages.push("UserService: deleted user id="+users[props.index].id);
+	ref.current.add("UserService: deleted user id="+users[props.index].id);
 	users.splice(props.index, 1);
 }
 
@@ -166,15 +168,8 @@ function ModifyUser(props) {
 	users[props.index].last_name = props.last_name;
 	users[props.index].email = props.email;
 	users[props.index].avatar = props.avatar;
-	messages.push("UserService: updated user id="+users[props.index].id);
+	ref.current.add("UserService: updated user id="+users[props.index].id);
 }
-
-
-// Overrides the genId method to ensure that a user always has an id.
-// If the users array is empty,
-// the method below returns the initial number (11).
-// if the users array is not empty, the method below returns the highest
-// user id + 1.
 
 function AddUser(props) {
 	var newUser = 
@@ -186,7 +181,11 @@ function AddUser(props) {
             "avatar": props.avatar
         };
 	users.push(newUser);
-	messages.push("UserService: added user w/ id="+newUser.id);
+	ref.current.add("UserService: added user w/ id="+newUser.id);
+}
+
+function add(message) {
+	ref.current.add(message);
 }
 
 export default App;
@@ -194,3 +193,4 @@ export { users };
 export { ModifyUser };
 export { DeleteUser };
 export { AddUser };
+export { add };

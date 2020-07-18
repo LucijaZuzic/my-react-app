@@ -1,30 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle} from "react";
 import './Message.css';
 
-const messages = [];
-
-const Message = (props) => {
-    const [msg, setMessages] = useState([...messages]);
-    if (msg.length > 0) {
+const Message = forwardRef((props, ref) => {
+    const [messages, setMessages] = useState([]);
+    const clear = () => {
+        setMessages([]);
+    };
+    const add = (message)  => {
+        const copyMessages = messages
+        copyMessages.push(message)
+        setMessages([...copyMessages])
+    };
+    useImperativeHandle(ref, () => {
+        return {
+         add: add,
+        }
+    });
+    if (messages.length) {
         return (
             <div>
                 <h2 className="messages">Messages</h2>
-                <button className="clear"
-                                onClick = {() => {messages.splice(0);setMessages([...messages])}}>clear</button>
-                                
-                <button className="clear"
-                                onClick = {() => {setMessages([...messages])}}>update</button>
-                {msg.map((item, index) =>  (
-                        <div key = {index} > {msg[index]} </div>
-                    
+                <button className="clear" onClick = {() => {clear()}}>clear</button>
+                {messages.map((message, index) =>  (
+                        <div key = {index} > {message} </div>
                 ))}
             </div>
         );
     } else {
-        return(<button className="clear" onClick = {() => {setMessages([...messages])}}>update</button>)
+        return(<div></div>);
     }
-}
-
+})
 
 export default Message;
-export { messages };
