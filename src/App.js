@@ -10,13 +10,7 @@ import Add from './Add.js';
 import UserDetails from './UserDetails.js';
 import Message from './Message';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Redirect, Route,  Link } from "react-router-dom";
 
 //const BrowserHistory = require('react-router/lib/BrowserHistory').default;
 
@@ -174,7 +168,7 @@ function ModifyUser(props) {
 function AddUser(props) {
 	var newUser = 
 		{
-            "id": users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 11,
+            "id": users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 1,
             "email": props.email,
             "first_name": props.first_name,
             "last_name": props.last_name,
